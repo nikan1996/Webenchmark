@@ -18,7 +18,7 @@ URL = 'https://github.com/nikan1996/Webenchmark'
 EMAIL = '859905874@qq.com'
 AUTHOR = 'Ni Kan'
 # REQUIRES_PYTHON = '>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

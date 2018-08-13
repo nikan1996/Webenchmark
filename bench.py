@@ -14,7 +14,7 @@ import time
 from itertools import cycle
 from typing import Text
 from urllib.parse import urlparse
-
+import json
 import gevent
 import gevent.pool
 from gevent.lock import Semaphore
@@ -211,10 +211,10 @@ def parse_args(shell_args):
     parser.add_argument('-k', '--keep-alive', dest='keep_alive', default=False, action='store_true', help='是否启用长连接')
     parser.add_argument('-a', '--auth', dest='auth', help='身份认证 eg. basic:user:password')
     parser.add_argument('-H', '--headers', dest='headers', help='请求头')
-    parser.add_argument('-C', '--cookies', dest='cookies', help='请求cookies')
+    parser.add_argument('-C', '--cookies', dest='cookies', type=str, help='请求cookies')
     parser.add_argument('urls', nargs='+', help='请求URL(一个或多个)')
 
-    parser.add_argument('--version', action='version', version='%(prog)s {}'.format('1.0.5'), help="当前版本")
+    parser.add_argument('--version', action='version', version='%(prog)s {}'.format('1.0'), help="当前版本")
     if len(sys.argv) == 1:
         parser.print_help()
         return
@@ -250,8 +250,10 @@ def parse_args(shell_args):
             auth = auth_class[auth_method.upper()](auth_user, auth_password)
 
         data = args.data
-        json = eval(args.json) if args.json else None
+        _json = eval(args.json) if args.json else None
         headers = eval(args.headers) if args.headers else None
+        print(args.cookies)
+        print(json.loads(args.cookies))
         cookies = eval(args.cookies) if args.cookies else None
         return {
             'concurrency': concurrency,
@@ -262,17 +264,17 @@ def parse_args(shell_args):
             'keep_alive': keep_alive,
             'auth': auth,
             'data': data,
-            'json': json,
+            'json': _json,
             'headers': headers,
             'cookies': cookies
         }
 
 def run():
     args = None
-    try:
-        args = parse_args(sys.argv[1:])
-    except Exception:
-        print('请检查命令是否正确')
+    # try:
+    args = parse_args(sys.argv[1:])
+    # except Exception:
+    #     print('请检查命令是否正确')
     if args:
         print('正在进行压测.....')
         start_bench(concurrency=args['concurrency'], total_requests=args['total_requests'], urls=args['urls'],
