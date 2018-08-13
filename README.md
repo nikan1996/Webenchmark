@@ -57,6 +57,8 @@ optional arguments:
 webenchmark -c 10 -n 30 https://www.baidu.com
 # 允许keep-alive
 webenchmark -k -c 10 -n 30 https://www.baidu.com
+# 设置超时时间（整数）
+webenchmark -t 1 -c 10 -n 30 https://www.baidu.com
 # 对多个URL进行混合请求
 webenchmark -c 10 -n 30 https://www.baidu.com http://example.com/ https://www.taobao.com/
 # basic auth
