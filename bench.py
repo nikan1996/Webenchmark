@@ -231,7 +231,7 @@ def parse_args(shell_args):
         def uri_validator(x):
             try:
                 result = urlparse(x)
-                return result.scheme and result.netloc and result.path
+                return result.scheme and result.netloc
             except:
                 return False
         for url in urls:
