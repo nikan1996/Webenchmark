@@ -56,7 +56,7 @@ optional arguments:
 # 对单个请求进行get测试
 webenchmark -c 10 -n 30 https://www.baidu.com
 # 允许keep-alive
-webenchmark -k -c 10 -n 30 True https://www.baidu.com
+webenchmark -k -c 10 -n 30 https://www.baidu.com
 # 对多个URL进行混合请求
 webenchmark -c 10 -n 30 https://www.baidu.com http://example.com/ https://www.taobao.com/
 # basic auth

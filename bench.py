@@ -8,20 +8,19 @@ pure python http benchmark client
 
 @time: 2018/7/31 上午10:11
 """
+
 import argparse
 import sys
 import time
 from itertools import cycle
 from typing import Text
 from urllib.parse import urlparse
-import json
+
 import gevent
 import gevent.pool
 from gevent.lock import Semaphore
 from gevent.monkey import patch_all
-
 patch_all()
-
 import requests
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 from requests.exceptions import ConnectionError
@@ -38,10 +37,10 @@ def mean(numbers: list):
 
 class URLContainer:
     """每个url都有3个时间connect_cost_time, process_cost_time, total_cost_time"""
+    keep_alive_session = requests.session()
 
     def __init__(self, url):
         self.url = url
-        self.keep_alive_session = requests.session()
         self.start_time = None
         self.connect_time = None
         self.read_time = None
@@ -234,6 +233,7 @@ def parse_args(shell_args):
                 return result.scheme and result.netloc
             except:
                 return False
+
         for url in urls:
             if not uri_validator(url):
                 print('URL校验失败，请检查你的URL是否有效')
@@ -252,8 +252,6 @@ def parse_args(shell_args):
         data = args.data
         _json = eval(args.json) if args.json else None
         headers = eval(args.headers) if args.headers else None
-        print(args.cookies)
-        print(json.loads(args.cookies))
         cookies = eval(args.cookies) if args.cookies else None
         return {
             'concurrency': concurrency,
@@ -269,6 +267,7 @@ def parse_args(shell_args):
             'cookies': cookies
         }
 
+
 def run():
     args = None
     # try:
@@ -281,6 +280,7 @@ def run():
                     timeout=args['timeout'], method=args['method'], keep_alive=args['keep_alive'], auth=args['auth'],
                     data=args['data'], json=args['json'],
                     headers=args['headers'], cookies=args['cookies'])
+
 
 if __name__ == '__main__':
     run()
