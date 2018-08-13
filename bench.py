@@ -20,6 +20,8 @@ import gevent.pool
 from gevent.lock import Semaphore
 from gevent.monkey import patch_all
 
+from setup import VERSION
+
 patch_all()
 
 import requests
@@ -208,13 +210,13 @@ def parse_args(shell_args):
     parser.add_argument('-d', '--data', dest='data', help='post/put 数据')
     parser.add_argument('-j', '--json', dest='json', help='post/put json 数据')
     parser.add_argument('-t', '--timeout', dest='timeout', type=int, help='超时时间')
-    parser.add_argument('-k', '--keep-alive', dest='keep_alive', default=False, help='是否启用长连接')
+    parser.add_argument('-k', '--keep-alive', dest='keep_alive', default=False, action='store_true', help='是否启用长连接')
     parser.add_argument('-a', '--auth', dest='auth', help='身份认证 eg. basic:user:password')
     parser.add_argument('-H', '--headers', dest='headers', help='请求头')
     parser.add_argument('-C', '--cookies', dest='cookies', help='请求cookies')
     parser.add_argument('urls', nargs='+', help='请求URL(一个或多个)')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 1.0', help="当前版本")
+    parser.add_argument('--version', action='version', version='%(prog)s {}'.format(VERSION), help="当前版本")
     if len(sys.argv) == 1:
         parser.print_help()
         return
@@ -268,7 +270,11 @@ def parse_args(shell_args):
         }
 
 def run():
-    args = parse_args(sys.argv[1:])
+    args = None
+    try:
+        args = parse_args(sys.argv[1:])
+    except Exception:
+        print('请检查命令是否正确')
     if args:
         print('正在进行压测.....')
         start_bench(concurrency=args['concurrency'], total_requests=args['total_requests'], urls=args['urls'],

@@ -17,6 +17,11 @@ def test_parse_args():
     assert args == {'concurrency': 1, 'total_requests': 1, 'urls': ['http://127.0.0.1:5000'], 'timeout': None, 'method': 'GET',
      'keep_alive': False, 'auth': None, 'data': None, 'json': None, 'headers': None, 'cookies': None}
 
+    command = "-k http://127.0.0.1:5000"
+    args = parse_args(command.split())
+    assert args == {'concurrency': 1, 'total_requests': 1, 'urls': ['http://127.0.0.1:5000'], 'timeout': None, 'method': 'GET',
+     'keep_alive': True, 'auth': None, 'data': None, 'json': None, 'headers': None, 'cookies': None}
+
 
     command = "-c 10 -n 100 http://127.0.0.1:5000"
     args = parse_args(command.split())
