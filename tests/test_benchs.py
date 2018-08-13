@@ -38,10 +38,25 @@ def test_bench_get():
         cookies = None
         start_bench(concurrency, total_requests, urls, timeout, method, keep_alive, auth, data, json, headers, cookies)
 
+    def test_timeout():
+        concurrency = 10
+        total_requests = 10
+        urls = ['http://127.0.0.1:22222/random_sleep']
+        timeout = 1
+        method = 'GET'
+        keep_alive = False
+        auth = None
+        data = None
+        json = None
+        headers = None
+        cookies = None
+        start_bench(concurrency, total_requests, urls, timeout, method, keep_alive, auth, data, json, headers, cookies)
+
     global local_server_exception
     local_server_exception = []
     test_get()
     assert local_server_exception == []
+    test_timeout()
 
 
 def test_bench_post():

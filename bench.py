@@ -20,6 +20,7 @@ import gevent
 import gevent.pool
 from gevent.lock import Semaphore
 from gevent.monkey import patch_all
+
 patch_all()
 import requests
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
@@ -101,6 +102,14 @@ class URLContainer:
             exit(0)
         except Exception as e:
             self.error = True
+            if not self.connect_time:
+                self.connect_time = time.time()
+
+            if not self.read_time:
+                self.read_time = time.time()
+
+            if not self.end_time:
+                self.end_time = time.time()
 
 
 class Benchmark:

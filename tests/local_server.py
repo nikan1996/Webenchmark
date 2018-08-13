@@ -25,6 +25,7 @@ digest_auth = HTTPDigestAuth()
 auth = MultiAuth(digest_auth, basic_auth)
 app.config['SECRET_KEY'] = 'secret'
 
+
 @basic_auth.get_password
 def get_pw(username):
     if username in USER['user']:
@@ -34,6 +35,7 @@ def get_pw(username):
         test_benchs.local_server_exception.append('No auth')
         return None
 
+
 @digest_auth.get_password
 def get_pw(username):
     if username in USER['user']:
@@ -42,6 +44,7 @@ def get_pw(username):
         from tests import test_benchs
         test_benchs.local_server_exception.append('No auth')
         return None
+
 
 @app.route('/')
 def hello_world():
@@ -57,7 +60,7 @@ def auth_test():
 
 @app.route('/random_sleep')
 def hello_sleep():
-    sleep_second = random.random(1, 3)
+    sleep_second = random.randint(2, 3)
     time.sleep(sleep_second)
     return 'Hello, Sleep for {}s'.format(sleep_second)
 
