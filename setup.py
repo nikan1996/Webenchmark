@@ -14,14 +14,15 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'webenchmark'
 DESCRIPTION = '命令行下的HTTP压测工具'
-URL = 'https://github.com/me/myproject'
-EMAIL = '859905874@example.com'
+URL = 'https://github.com/nikan1996/Webenchmark'
+EMAIL = '859905874@qq.com'
 AUTHOR = 'Ni Kan'
-REQUIRES_PYTHON = '>=3.6.0'
+REQUIRES_PYTHON = '>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
 VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
+    'requests', 'gevent'
     # 'requests', 'maya', 'records',
 ]
 
@@ -100,7 +101,7 @@ setup(
     long_description_content_type='text/markdown',
     author=AUTHOR,
     author_email=EMAIL,
-    python_requires=">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
+    python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
