@@ -20,8 +20,6 @@ import gevent.pool
 from gevent.lock import Semaphore
 from gevent.monkey import patch_all
 
-from setup import VERSION
-
 patch_all()
 
 import requests
@@ -216,7 +214,7 @@ def parse_args(shell_args):
     parser.add_argument('-C', '--cookies', dest='cookies', help='请求cookies')
     parser.add_argument('urls', nargs='+', help='请求URL(一个或多个)')
 
-    parser.add_argument('--version', action='version', version='%(prog)s {}'.format(VERSION), help="当前版本")
+    parser.add_argument('--version', action='version', version='%(prog)s {}'.format('1.0.5'), help="当前版本")
     if len(sys.argv) == 1:
         parser.print_help()
         return
