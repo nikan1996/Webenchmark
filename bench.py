@@ -219,6 +219,8 @@ def parse_args(shell_args):
         parser.print_help()
         return
     else:
+        if shell_args is None:
+            shell_args = sys.argv[1:]
         args = parser.parse_args(shell_args)
 
         urls = args.urls
@@ -265,8 +267,7 @@ def parse_args(shell_args):
             'cookies': cookies
         }
 
-
-if __name__ == '__main__':
+def run():
     args = parse_args(sys.argv[1:])
     if args:
         print('正在进行压测.....')
@@ -274,3 +275,6 @@ if __name__ == '__main__':
                     timeout=args['timeout'], method=args['method'], keep_alive=args['keep_alive'], auth=args['auth'],
                     data=args['data'], json=args['json'],
                     headers=args['headers'], cookies=args['cookies'])
+
+if __name__ == '__main__':
+    run()
