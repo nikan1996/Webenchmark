@@ -7,6 +7,8 @@
 
 ## 用法说明：
 
+![](http://p2a2srwhl.bkt.clouddn.com/webenchmarkwebenchmark.svg)
+
 ### 安装：
 
 ```
