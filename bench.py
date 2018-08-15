@@ -189,7 +189,7 @@ class Benchmark:
         formatted_string_one = '\n'.join(['{:20s}{}'.format('并发数：', self.concurrency),
                                           '{:20s}{}'.format('请求数：', self.total_requests),
                                           '{:20s}{}'.format('失败数：', failed_responses),
-                                          '{:19s}{}'.format('非200请求数：', non_200_responses),
+                                          '{:19s}{}'.format('非200响应数：', non_200_responses),
                                           '{:14s}{:.3f}'.format('平均请求时长（秒）：', total_time_mean),
                                           ])
         request_time_distribution_string = self.get_request_time_distribution(total_times)
