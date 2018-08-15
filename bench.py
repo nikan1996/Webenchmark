@@ -220,7 +220,7 @@ def parse_args(shell_args):
     parser.add_argument('-a', '--auth', dest='auth', help='身份认证 eg. basic:user:password')
     parser.add_argument('-H', '--headers', dest='headers', help='请求头')
     parser.add_argument('-C', '--cookies', dest='cookies', type=str, help='请求cookies')
-    parser.add_argument('urls', nargs='+', help='请求URL(一个或多个)')
+    parser.add_argument('urls', nargs='*', help='请求URL(一个或多个)')
 
     parser.add_argument('--version', action='version', version='%(prog)s {}'.format('1.0'), help="当前版本")
     if len(sys.argv) == 1:
@@ -234,7 +234,7 @@ def parse_args(shell_args):
         urls = args.urls
         if args.file_path:
             with open(args.file_path) as open_file:
-                urls = list(open_file)
+                urls = [_.strip() for _ in open_file]
 
         def uri_validator(x):
             try:

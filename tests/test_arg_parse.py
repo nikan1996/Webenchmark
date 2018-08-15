@@ -71,3 +71,7 @@ def test_parse_args():
     args = parse_args(command.split())
     assert args == {'concurrency': 1, 'total_requests': 1, 'urls': ['http://127.0.0.1:5000'], 'timeout': None, 'method': 'GET',
      'keep_alive': False, 'auth': None, 'data': None, 'json': None, 'headers': {'user-agent':'hahah'}, 'cookies': {'a':'1'}}
+
+    command = "-f correct_file"
+    args = parse_args(command.split())
+    assert args == {'concurrency': 1, 'total_requests': 5, 'urls': ['http://example.com/', 'http://example.com/1', 'http://example.com/2', 'http://example.com/3', 'http://example.com/4'], 'timeout': None, 'method': 'GET', 'keep_alive': False, 'auth': None, 'data': None, 'json': None, 'headers': None, 'cookies': None}

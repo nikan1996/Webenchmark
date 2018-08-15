@@ -74,6 +74,9 @@ webenchmark -m POST -j "{'test':'test_json'}" -c 10 -n 100 http://example.com/
 
 # Headers和Cookies
 webenchmark -H "{'user-agent':'hahah'}" -C "{'a':'1'}" http://example.com/
+
+# 有非常多的url可以放于文件中,每行一个url
+webenchmark -f benchamark.txt
 ```
 
 输出示例：
