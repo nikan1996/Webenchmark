@@ -1,4 +1,6 @@
 # 一款基于命令行的网站压测小工具Webenchmark
+
+Similar to Apache Benchmark and suggest mixed urls as test set. Also added support for digest auth.
 + 支持HTTP GET, POST, PUT, DELETE, HEAD操作
 + 支持长连接
 + 支持多个URL混合测试
