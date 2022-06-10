@@ -74,7 +74,7 @@ webenchmark -a digest:test_user:test_passtest_password http://example.com/
 webenchmark -m POST -j "{'test':'test_json'}" -c 10 -n 100 http://example.com/ 
 
 # post data
-webenchmark -m POST -j "{'test':'test_json'}" -c 10 -n 100 http://example.com/ 
+webenchmark -m POST -d "{'test':'test_json'}" -c 10 -n 100 http://example.com/ 
 
 # Headers和Cookies
 webenchmark -H "{'user-agent':'hahah'}" -C "{'a':'1'}" http://example.com/
